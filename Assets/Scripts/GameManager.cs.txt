@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+
+    [SerializeField] private PointSpawner enemySpawner;
+
+    [SerializeField]
+    [Tooltip("Fallen enemies to increase the number of enemies")]
+    [Min(1)]
+    private int difficultyEnemies;
+
+    private void FixedUpdate()
+    {
+        if (Enemy.DestroyedEnemies >= difficultyEnemies && enemySpawner.SpawnPointsQuantity <= enemySpawner.SpawnQuantity + 1)
+        {
+            Enemy.DestroyedEnemies = 0;
+            enemySpawner.SpawnQuantity += 1;
+        }
+    }
+}
